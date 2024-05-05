@@ -61,8 +61,8 @@ h4,
 h5,
 h6,
 p {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: auto;
+    max-width: 50rem;
 }
 
 ul {
@@ -73,10 +73,9 @@ a {
     text-decoration: none;
 }
 
-body,
-figure,
 ul {
-    margin: 0;
+    max-width: 50rem;
+    margin: auto;
 }
 
 table {
@@ -113,6 +112,6 @@ textarea:-webkit-autofill {
 }
 
 img {
-    display: block;
     max-width: 100%;
+    height: auto;
 }

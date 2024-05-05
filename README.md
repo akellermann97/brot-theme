@@ -1,5 +1,11 @@
-<h1 align=center>Hugo PaperMod | <a href="https://adityatelange.github.io/hugo-PaperMod/" rel="nofollow">Demo</a></h1>
+<h1 align=center>Brot Theme | <a href="https://adityatelange.github.io/hugo-PaperMod/" rel="nofollow">Based On</a></h1>
 
+<h2 align=center>99% based on Papermod, which is based on Hugo-Paper</h4>
+Adjustments Made:
+Rather than bounding articles based on the size of the main div, we let elements bound themselves.
+This change is made primarily for the purpose of enabling the use of a CSS grid to display images, which would be larger than the typical bounded article size of the basic Hugo-Paper theme.
+
+Branding and other things will be changed to better differentiate between this and the source material, but everything below this line is based on the README.md from papermod. Check them out! They did all the hard work. I'm just editing margins and max-widths.
 <h4 align=center>☄️ Fast | ☁️ Fluent | 🌙 Smooth | 📱 Responsive</h4>
 <br>
 

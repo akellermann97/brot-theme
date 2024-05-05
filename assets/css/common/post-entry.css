@@ -4,7 +4,9 @@
     flex-direction: column;
     justify-content: center;
     min-height: 320px;
-    margin: var(--gap) 0 calc(var(--gap) * 2) 0;
+    max-width: 60rem;
+    margin: auto;
+    margin-bottom: 2rem;
 }
 
 .first-entry .entry-header {
@@ -35,8 +37,10 @@
 
 .post-entry {
     position: relative;
-    margin-bottom: var(--gap);
-    padding: var(--gap);
+    margin: auto;
+    margin-bottom: 2rem;
+    max-width: var(--max-width);
+    padding:1rem;
     background: var(--entry);
     border-radius: var(--radius);
     transition: transform 0.1s;
@@ -52,12 +56,13 @@
 }
 
 .entry-header h2 {
+    margin: auto;
     font-size: 24px;
     line-height: 1.3;
 }
 
 .entry-content {
-    margin: 8px 0;
+    margin: auto;
     color: var(--secondary);
     font-size: 14px;
     line-height: 1.6;
@@ -91,8 +96,7 @@
 
 .entry-cover {
     font-size: 14px;
-    margin-bottom: var(--gap);
-    text-align: center;
+    max-width: 100%;
 }
 
 .entry-cover img {
@@ -105,4 +109,19 @@
 .entry-cover a {
     color: var(--secondary);
     box-shadow: 0 1px 0 var(--primary);
+}
+
+figure.normal img {
+    max-width: 100%;
+    height: auto;
+}
+
+figure.normal {
+    max-width: 60rem;
+    margin: auto;
+}
+
+figure.vert {
+    max-width: 40rem;
+    margin: auto;
 }

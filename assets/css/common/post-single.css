@@ -1,6 +1,6 @@
 .page-header,
 .post-header {
-    margin: 24px auto var(--content-gap) auto;
+    margin: auto;
 }
 
 .post-title {
@@ -49,23 +49,27 @@
 }
 
 .post-content h2 {
-    margin: 32px auto 24px;
+    margin: auto;
     font-size: 32px;
 }
 
 .post-content h3 {
+    margin: auto;
     font-size: 24px;
 }
 
 .post-content h4 {
+    margin: auto;
     font-size: 16px;
 }
 
 .post-content h5 {
+    margin: auto;
     font-size: 14px;
 }
 
 .post-content h6 {
+    margin: auto;
     font-size: 12px;
 }
 
@@ -130,6 +134,8 @@
 }
 
 .post-content table {
+    margin: auto;
+    max-width: var(--max-width);
     margin-bottom: var(--content-gap);
 }
 
@@ -210,7 +216,8 @@
 }
 
 .post-content blockquote {
-    margin: 20px 0;
+    max-width: var(--max-width);
+    margin: auto;
     padding: 0 14px;
     border-inline-start: 3px solid var(--primary);
 }
@@ -243,7 +250,15 @@
     color: var(--primary);
     font-size: 16px;
     font-weight: bold;
-    margin: 8px 0 16px;
+    /*margin: 8px 0 16px;*/
+}
+
+.post-single.entry-cover {
+    width: 100vw;
+    max-width: 100vw;
+    position: relative;
+    left: calc(-50vw + 50%);
+    margin-left: 0;
 }
 
 .post-content figure > figcaption > p {
@@ -253,9 +268,10 @@
 }
 
 .toc {
-    margin: 0 2px 40px 2px;
+    max-width: 30rem;
+    margin: auto;
     border: 1px solid var(--border);
-    background: var(--code-bg);
+    background: var(--code-bg)e;
     border-radius: var(--radius);
     padding: 0.4em;
 }
@@ -274,7 +290,7 @@
 }
 
 .toc .details {
-    display: inline;
+    display: inline-block;
     font-weight: 500;
 }
 
@@ -404,4 +420,43 @@ h1>a>svg {
 img.in-text {
     display: inline;
     margin: auto;
+}
+
+.exhibit-2cl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0;
+}
+
+.exhibit-3cl {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-flow: column, dense;
+    grid-auto-columns: 400px;
+}
+
+.exhibit-2cl figure,
+.exhibit-3cl figure,
+.exhibit-2cl-2rw figure {
+    margin: 5%;
+}
+
+.exhibit-2cl-2rw {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-flow: column, dense;
+    grid-template-areas: 
+    "one two"
+    "three two";
+}
+
+.one {
+    grid-area: one;
+}
+.two {
+    grid-area: two;
+}
+.three {
+    grid-area: three
 }
