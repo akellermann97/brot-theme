@@ -49,27 +49,27 @@
 }
 
 .post-content h2 {
-    margin: auto;
+    margin: .8rem auto;
     font-size: 32px;
 }
 
 .post-content h3 {
-    margin: auto;
+    margin: .8rem auto;
     font-size: 24px;
 }
 
 .post-content h4 {
-    margin: auto;
+    margin: .8rem auto;
     font-size: 16px;
 }
 
 .post-content h5 {
-    margin: auto;
+    margin: .8rem auto;
     font-size: 14px;
 }
 
 .post-content h6 {
-    margin: auto;
+    margin: .8rem auto;
     font-size: 12px;
 }
 
