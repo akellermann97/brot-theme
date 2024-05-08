@@ -28,6 +28,23 @@
         padding: calc((var(--footer-height) - var(--gap) - 10px) / 2) var(--gap);
     }
 }
+/* footer */
+@media screen and (max-width: 768px) {
+    .exhibit-2cl,
+    .exhibit-3cl,
+    .exhibit-2cl-2rw {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: unset;
+        grid-auto-flow: dense;
+        grid-template-areas: unset;
+    }
+    .one,
+    .two,
+    .three {
+        grid-area: unset;
+    }
+}
 
 /* footer */
 @media screen and (max-width: 900px) {

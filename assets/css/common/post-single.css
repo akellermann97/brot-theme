@@ -253,12 +253,20 @@
     /*margin: 8px 0 16px;*/
 }
 
-.post-single.entry-cover {
-    width: 100vw;
-    max-width: 100vw;
+.post-single .entry-cover {
+    /*width: 100vw;*/
+    height: 100vh;
+    min-height: 100vh;
+    min-width: 100vw;
     position: relative;
     left: calc(-50vw + 50%);
     margin-left: 0;
+}
+
+.entry-cover img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .post-content figure > figcaption > p {
@@ -425,7 +433,6 @@ img.in-text {
 .exhibit-2cl {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 0;
 }
 
 .exhibit-3cl {
@@ -433,19 +440,27 @@ img.in-text {
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-flow: column, dense;
     grid-auto-columns: 400px;
+    max-width: 60rem;
+}
+
+.exhibit-2cl ,
+.exhibit-3cl ,
+.exhibit-2cl-2rw {
+    max-width: 80rem;
+    margin: auto;
+    gap: 1.4rem;
 }
 
 .exhibit-2cl figure,
 .exhibit-3cl figure,
 .exhibit-2cl-2rw figure {
-    margin: 5%;
+    margin: 0;
 }
 
 .exhibit-2cl-2rw {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-auto-flow: column, dense;
     grid-template-areas: 
     "one two"
     "three two";
