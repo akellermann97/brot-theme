@@ -62,7 +62,10 @@ h5,
 h6,
 p {
     margin: auto;
-    max-width: 50rem;
+    max-width: var(--reading-width);
+}
+p {
+    line-height: 2rem;
 }
 
 ul {
@@ -74,7 +77,7 @@ a {
 }
 
 ul {
-    max-width: 50rem;
+    max-width: 37rem;
     margin: auto;
 }
 

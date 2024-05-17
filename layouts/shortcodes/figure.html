@@ -1,3 +1,9 @@
+{{ $image := .Get "src" }}
+{{ $type_arr := split $image "." }}
+{{ $filename := index $type_arr 0 }}
+{{ $avifExists := resources.Get (printf "%s.avif" $filename) }}
+{{ $jxlExists := resources.Get (printf "%s.jxl" $filename) }}
+
 <figure{{ if or (.Get "class") (eq (.Get "align") "center") }} class="
            {{- if eq (.Get "align") "center" }}align-center {{ end }}
            {{- with .Get "class" }}{{ . }}{{- end }}"
@@ -5,13 +11,17 @@
     {{- if .Get "link" -}}
         <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
     {{- end }}
-    <img loading="lazy" src="{{ .Get "src" }}{{- if eq (.Get "align") "center" }}#center{{- end }}"
+    <picture>
+    {{ if $jxlExists }}<source srcset="{{ $filename }}.jxl" type="image/jxl"/>{{ end }}
+    {{ if $avifExists }}<source srcset="{{ $filename }}.avif" type="image/avif"/>{{ end }}
+    <img loading="lazy" src="{{ $image }}"
          {{- if or (.Get "alt") (.Get "caption") }}
          alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
          {{- end -}}
          {{- with .Get "width" }} width="{{ . }}"{{ end -}}
          {{- with .Get "height" }} height="{{ . }}"{{ end -}}
     /> <!-- Closing img tag -->
+    </picture>
     {{- if .Get "link" }}</a>{{ end -}}
     {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
         <figcaption>

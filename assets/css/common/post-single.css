@@ -135,7 +135,7 @@
 
 .post-content table {
     margin: auto;
-    max-width: var(--max-width);
+    max-width: var(--reading-width);
     margin-bottom: var(--content-gap);
 }
 
@@ -216,7 +216,7 @@
 }
 
 .post-content blockquote {
-    max-width: var(--max-width);
+    max-width: var(--reading-width);
     margin: auto;
     padding: 0 14px;
     border-inline-start: 3px solid var(--primary);

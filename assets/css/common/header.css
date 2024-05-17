@@ -91,3 +91,53 @@ body:not(.dark) #sun {
 .logo-switches {
     flex-wrap: inherit;
 }
+
+.hamburger-list {
+    display: none;
+}
+
+.hamburger-list menu {
+    display: none;
+}
+
+.hamburger:has(input:checked) + .hamburger-list {
+    display: none;
+    flex-direction: column;
+}
+
+.hamburger-list li {
+    border-bottom: 2px solid;
+    border-color: var(--tertiary);
+}
+
+.hamburger-list ul {
+    min-width: 100vw;
+}
+.hamburger {
+    cursor: pointer;
+    display: none;
+    margin: auto var(--gap);
+    gap: 4px;
+    line-height: unset;
+}
+
+.hamburger::before,
+.hamburger::after,
+.hamburger input {
+    content: "";
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary);
+}
+
+.hamburger input {
+    appearance: none;
+    padding: none;
+    outline: none;
+    pointer-events: none;
+    margin: auto;
+}
+
+.hamburger input:checked {
+    /* Maybe throw in an animation here? */
+}

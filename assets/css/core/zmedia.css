@@ -28,8 +28,41 @@
         padding: calc((var(--footer-height) - var(--gap) - 10px) / 2) var(--gap);
     }
 }
-/* footer */
 @media screen and (max-width: 768px) {
+    .hamburger-list {
+        display: none;
+        width: 100%;
+        align-items: center;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hamburger:has(input:checked) + .hamburger-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .hamburger-list #menu {
+        display: flex;
+        flex-direction: column;
+    }
+    .hamburger-list li {
+        text-align: center;
+    }
+
+    #menu li+li {
+        margin-inline-start: 0;
+    }
+
+    .entree {
+        display: none;
+    }
+}
+/* footer */
+@media screen and (max-width: 600px) {
     .exhibit-2cl,
     .exhibit-3cl,
     .exhibit-2cl-2rw {

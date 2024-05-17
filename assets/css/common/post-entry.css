@@ -39,7 +39,7 @@
     position: relative;
     margin: auto;
     margin-bottom: 2rem;
-    max-width: var(--max-width);
+    max-width: var(--reading-width);
     padding:1rem;
     background: var(--entry);
     border-radius: var(--radius);
