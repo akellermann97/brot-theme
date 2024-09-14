@@ -4,7 +4,7 @@
     max-width: 100%;
     /*max-width: calc(var(--main-width) + var(--gap) * 2);*/
     margin: auto;
-    padding: var(--gap);
+    /*padding: var(--gap);*/
 }
 
 .page-header h1 {
@@ -12,6 +12,7 @@
 }
 .post-header {
     /*max-width: calc(var(--main-width) + var(--gap) * 2);*/
+    padding: var(--gap);
 }
 .post-meta {
     max-width: var(--reading-width);

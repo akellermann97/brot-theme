@@ -37,14 +37,17 @@
 
 .post-entry {
     position: relative;
+    justify-content: center;
+    align-items: center;
     margin: auto;
     margin-bottom: 2rem;
     max-width: var(--reading-width);
-    padding:1rem;
+    padding: 1rem;
     background: var(--entry);
     border-radius: var(--radius);
     transition: transform 0.1s;
     border: 1px solid var(--border);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
 .post-entry:active {
@@ -123,5 +126,9 @@ figure.normal {
 
 figure.vert {
     max-width: 40rem;
+    margin: auto;
+}
+
+figure.wide {
     margin: auto;
 }

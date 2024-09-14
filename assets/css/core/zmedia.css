@@ -29,6 +29,11 @@
     }
 }
 @media screen and (max-width: 768px) {
+    .post-content {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
     .hamburger-list {
         display: none;
         width: 100%;
@@ -71,11 +76,18 @@
         grid-template-rows: unset;
         grid-auto-flow: dense;
         grid-template-areas: unset;
+        column-gap: unset;
+        row-gap: unset;
+        margin: unset;
     }
     .one,
     .two,
     .three {
         grid-area: unset;
+    }
+
+    .wide {
+        margin: unset;
     }
 }
 

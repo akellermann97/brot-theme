@@ -38,18 +38,3 @@ features = [
   "search"
 ]
 min_version = "0.112.4"
-
-[author]
-  name = "Alex Kellermann"
-  homepage = "https://brot.dev/"
-
-# If porting an existing theme
-[author]
-  name = "Aditya Telange"
-  homepage = "https://github.com/adityatelange/"
-
-[original]
-  name = "Paper"
-  author = "nanxiaobei"
-  homepage = "https://github.com/nanxiaobei"
-  repo = "https://github.com/nanxiaobei/hugo-paper/"
