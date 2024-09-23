@@ -269,6 +269,10 @@
     margin-left: 0;
 }
 
+figure.entry-cover {
+    margin: 0;
+}
+
 .entry-cover img {
     height: 100%;
     width: 100%;
