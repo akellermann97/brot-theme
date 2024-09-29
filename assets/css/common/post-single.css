@@ -285,9 +285,14 @@ figure.entry-cover {
     font-weight: normal;
 }
 
+.toc-box {
+    margin-top: var(--content-gap);
+    margin-bottom: var(--content-gap);
+    padding: 14px;
+}
+
 .toc {
     max-width: 30rem;
-    margin: auto;
     border: 1px solid var(--border);
     background: var(--code-bg)e;
     border-radius: var(--radius);
@@ -299,12 +304,12 @@ figure.entry-cover {
 }
 
 .toc details summary {
-    cursor: zoom-in;
+    cursor: pointer;
     margin-inline-start: 20px;
 }
 
 .toc details[open] summary {
-    cursor: zoom-out;
+    cursor: pointer;
 }
 
 .toc .details {
