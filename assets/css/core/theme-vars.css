@@ -19,7 +19,8 @@
     --border: rgb(238, 238, 238);
     --serif-font-family: "Georgia";
     --serif-font-weight: 400;
-    --sans-serif-font-family: "Arial"
+    --sans-serif-font-family: "din2014bold";
+    --ui-font-family: "din2014regular";
 }
 
 .dark {
