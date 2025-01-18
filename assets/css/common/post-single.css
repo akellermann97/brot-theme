@@ -107,6 +107,9 @@
 .post-content ol,
 .post-content ul {
     padding-inline-start: 20px;
+    max-width: var(--reading-width);
+    margin: auto;
+    margin-bottom: var(--content-gap);
 }
 
 .post-content li {
@@ -457,6 +460,12 @@ img.in-text {
     grid-auto-flow: column, dense;
     grid-auto-columns: 400px;
     max-width: 80rem;
+}
+
+.post-content .goat {
+    max-width: var(--reading-width);
+    margin: auto;
+    margin-bottom: var(--content-gap);
 }
 
 .margin-auto {

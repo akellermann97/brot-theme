@@ -107,8 +107,8 @@ body:not(.dark) #sun {
 }
 
 .hamburger-list li {
-    border-bottom: 2px solid;
-    border-color: var(--tertiary);
+    /*border-bottom: 2px solid;
+    border-color: var(--tertiary);*/
 }
 
 .hamburger-list ul {
