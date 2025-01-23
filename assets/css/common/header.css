@@ -2,14 +2,27 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     max-width: calc(var(--nav-width) + var(--gap) * 2);
     margin-inline-start: auto;
     margin-inline-end: auto;
-    line-height: var(--header-height);
+    padding-top: 1rem;
 }
 
-.nav a {
+.nav #menu a {
     display: block;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+}
+
+.nav li:hover {
+    background-color: var(--tertiary);
+    border-radius: .375rem;
+    transition-property: background-color;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .15s;
 }
 
 .logo,
@@ -59,7 +72,7 @@ body:not(.dark) #sun {
 }
 
 #menu li + li {
-    margin-inline-start: var(--gap);
+    margin-inline-start: var(--nav-gap);
 }
 
 #menu a {

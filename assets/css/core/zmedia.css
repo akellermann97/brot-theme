@@ -84,6 +84,15 @@
     .entree {
         display: none;
     }
+
+    .nav #menu a {
+        display: block;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
+
 }
 /* footer */
 @media screen and (max-width: 600px) {

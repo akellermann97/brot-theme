@@ -13,7 +13,6 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
 }
 
 .first-entry .entry-header h1 {

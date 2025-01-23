@@ -1,5 +1,6 @@
 :root {
     --gap: 24px;
+    --nav-gap: .75rem;
     --content-gap: 2.9rem;
     --max-width: 50rem;
     --reading-width: 40rem;
