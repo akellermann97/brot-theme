@@ -1,4 +1,5 @@
 {{ $image := .Get "src" }}
+{{ $imageResource := resources.Get $image }}
 {{ $type_arr := split $image "." }}
 {{ $filename := index $type_arr 0 }}
 {{ $avifExists := resources.Get (printf "%s.avif" $filename) }}
@@ -18,8 +19,8 @@
          {{- if or (.Get "alt") (.Get "caption") }}
          alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
          {{- end -}}
-         {{- with .Get "width" }} width="{{ . }}"{{ end -}}
-         {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+         width="{{ $imageResource.Width }}"
+         height="{{ $imageResource.Height }}"
     /> <!-- Closing img tag -->
     </picture>
     {{- if .Get "link" }}</a>{{ end -}}
