@@ -112,6 +112,11 @@
     margin-bottom: var(--content-gap);
 }
 
+.post-content li > ul,
+.post-content li > ol {
+    margin-bottom: 0;
+}
+
 .post-content li {
     margin-top: 5px;
 }
