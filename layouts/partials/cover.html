@@ -31,7 +31,9 @@
     {{- else }}{{/* For absolute urls and external links, no img processing here */}}
         {{- if $addLink }}<a href="{{ (.Params.cover.image) | absURL }}" target="_blank"
             rel="noopener noreferrer">{{ end -}}
+            <picture>
             <img loading="{{$loading}}" src="{{ (.Params.cover.image) | absURL }}" alt="{{ $alt }}">
+            </picture>
     {{- end }}
     {{- if $addLink }}</a>{{ end -}}
     {{/*  Display Caption  */}}
