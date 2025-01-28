@@ -11,8 +11,6 @@
 
 .first-entry .entry-header {
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
 }
 
 .first-entry .entry-header h1 {
