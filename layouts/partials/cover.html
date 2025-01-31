@@ -32,7 +32,13 @@
         {{- if $addLink }}<a href="{{ (.Params.cover.image) | absURL }}" target="_blank"
             rel="noopener noreferrer">{{ end -}}
             <picture>
-            <img loading="{{$loading}}" src="{{ (.Params.cover.image) | absURL }}" alt="{{ $alt }}">
+            {{ $type_arr := split .Params.cover.image "." }}
+            {{ $filename := index $type_arr 0 }}
+            {{ $avifExists := resources.Get (printf "%s.avif" $filename) }}
+            {{ $jxlExists := resources.Get (printf "%s.jxl" $filename) }}
+            {{ if $jxlExists }}<source srcset="{{ $filename }}.jxl" type="image/jxl"/>{{ end }}
+            {{ if $avifExists }}<source srcset="{{ $filename }}.avif" type="image/avif"/>{{ end }}
+            <img loading="{{$loading}}" src="{{ .Params.cover.image }}" alt="{{ $alt }}">
             </picture>
     {{- end }}
     {{- if $addLink }}</a>{{ end -}}
