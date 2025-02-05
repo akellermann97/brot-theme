@@ -2,6 +2,7 @@
 {{- if (and .Params.cover.image (not $.isHidden)) }}
 {{- $alt := (.Params.cover.alt | default .Params.cover.caption | plainify) }}
 {{- $loading := cond $.IsSingle "eager" "lazy" }}
+{{ $imageResource := resources.Get .Params.cover.image }}
 <figure class="entry-cover">
     {{- $responsiveImages := (.Params.cover.responsiveImages | default site.Params.cover.responsiveImages) | default true }}
     {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}
@@ -38,7 +39,10 @@
             {{ $jxlExists := resources.Get (printf "%s.jxl" $filename) }}
             {{ if $jxlExists }}<source srcset="{{ $filename }}.jxl" type="image/jxl"/>{{ end }}
             {{ if $avifExists }}<source srcset="{{ $filename }}.avif" type="image/avif"/>{{ end }}
-            <img loading="{{$loading}}" src="{{ .Params.cover.image }}" alt="{{ $alt }}">
+            <img loading="{{$loading}}" src="{{ .Params.cover.image }}" alt="{{ $alt }}"
+            width="{{ $imageResource.Width }}"
+            height="{{ $imageResource.Height }}"
+            />
             </picture>
     {{- end }}
     {{- if $addLink }}</a>{{ end -}}
