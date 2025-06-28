@@ -2,6 +2,7 @@
     /* theme-vars */
     :root {
         --gap: 14px;
+        --figure-gap: 2.9rem;
     }
 
     /* profile-mode */
@@ -29,9 +30,24 @@
     }
 }
 @media screen and (max-width: 768px) {
-    .post-content {
-        margin-left: 16px;
-        margin-right: 16px;
+    .post-content p,
+    .post-content figure:not(.full-width),
+    .post-content h1,
+    .post-content h2,
+    .post-content h3,
+    .post-content h4,
+    .post-content h5,
+    .post-content h6 {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .post-content blockquote,
+    .post-content ol,
+    .post-content ul {
+        list-style-position: inside;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     .hamburger-list {

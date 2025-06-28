@@ -25,6 +25,8 @@
 
 .pagination {
     display: flex;
+    max-width: var(--reading-width);
+    margin: auto;
 }
 
 .post-single li,

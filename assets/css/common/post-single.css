@@ -93,15 +93,20 @@
 .post-content dl,
 .post-content ol,
 .post-content p,
-.post-content figure,
 .post-content ul {
     margin-bottom: var(--content-gap);
+}
+
+.post-content figure {
+    margin-bottom: var(--figure-gap);
+    margin-top: var(--figure-gap);
 }
 
 .post-content .exhibit-2cl,
 .post-content .exhibit-3cl,
 .post-content .exhibit-2cl-2rw {
-    margin-bottom: var(--content-gap);
+    margin-bottom: var(--figure-gap);
+    margin-top: var(--figure-gap);
 }
 
 .post-content ol,
@@ -510,7 +515,7 @@ img.in-text {
 }
 
 .full-width {
-    max-width: 100%;
+    width: 100%;
     padding: 0;
     margin: 0;
 }
