@@ -39,6 +39,7 @@
 .logo a {
     font-size: 24px;
     font-weight: 700;
+    margin: auto;
 }
 
 .logo a img, .logo a svg {
