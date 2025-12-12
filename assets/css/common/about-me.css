@@ -164,6 +164,7 @@
     background: var(--code-block-bg) !important;
     border-radius: var(--radius);
     direction: ltr;
+    max-width: var(--reading-width);
 }
 
 .post-content li > .highlight {

@@ -102,9 +102,10 @@
     margin-top: var(--figure-gap);
 }
 
-.post-content .exhibit-2cl,
-.post-content .exhibit-3cl,
-.post-content .exhibit-2cl-2rw {
+.post-content .exhibit-two-cl,
+.post-content .exhibit-three-cl,
+.post-content .exhibit-two-cl-2rw,
+.post-content .exhibit-two-cl-match-height {
     margin-bottom: var(--figure-gap);
     margin-top: var(--figure-gap);
 }
@@ -183,6 +184,7 @@
     background: var(--code-block-bg) !important;
     border-radius: var(--radius);
     direction: ltr;
+    max-width: var(--reading-width);
 }
 
 .post-content li > .highlight {
@@ -458,13 +460,13 @@ img.in-text {
     margin: auto;
 }
 
-.exhibit-2cl {
+.exhibit-two-cl {
     display: grid;
     grid-template-columns: 1fr 1fr;
     max-width: 80rem;
 }
 
-.exhibit-3cl {
+.exhibit-three-cl {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-flow: column, dense;
@@ -490,21 +492,25 @@ img.in-text {
     max-width: 80rem;
 }
 
-.exhibit-2cl ,
-.exhibit-3cl ,
-.exhibit-2cl-2rw {
+.exhibit-two-cl ,
+.exhibit-three-cl ,
+.exhibit-two-cl-2rw,
+.exhibit-two-cl-1fr-2fr,
+.exhibit-two-cl-2fr-1fr {
     margin: auto;
     gap: 1.4rem;
 }
 
-.exhibit-2cl figure,
-.exhibit-3cl figure,
-.exhibit-2cl-2rw figure {
+.exhibit-two-cl figure,
+.exhibit-three-cl figure,
+.exhibit-two-cl-2rw figure,
+.exhibit-two-cl-2fr-1fr figure,
+.exhibit-two-cl-1fr-2fr figure {
     margin: 0;
     margin-bottom: 0;
 }
 
-.exhibit-2cl-2rw picture {
+.exhibit-two-cl-2rw picture {
     display: flex;
 }
 
@@ -512,6 +518,10 @@ img.in-text {
     margin: auto;
     max-width: 90rem;
     margin: 2%;
+}
+
+.big {
+    max-width: 110rem;
 }
 
 .full-width {
@@ -526,11 +536,11 @@ img.in-text {
     margin-right: var(--gap);
 }
 
-.exhibit-2cl-2rw {
+.exhibit-two-cl-2rw {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
+    grid-template-areas:
     "one two"
     "three two";
     column-gap: 2%;
@@ -549,4 +559,24 @@ img.in-text {
 .three {
     grid-area: three;
     place-self: top;
+}
+
+.exhibit-two-cl-1fr-2fr {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 2fr;
+    gap: 2%;
+    align-items: center;
+    margin-left: var(--gap);
+    margin-right: var(--gap);
+}
+
+.exhibit-two-cl-2fr-1fr {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 2fr 1fr;
+    gap: 2%;
+    align-items: center;
+    margin-left: var(--gap);
+    margin-right: var(--gap);
 }
