@@ -123,12 +123,12 @@ figure.normal img {
 }
 
 figure.normal {
-    max-width: 60rem;
+    max-width: var(--gallery-normal);
     margin: auto;
 }
 
 figure.vert {
-    max-width: 40rem;
+    max-width: var(--gallery-vert);
     margin: auto;
 }
 

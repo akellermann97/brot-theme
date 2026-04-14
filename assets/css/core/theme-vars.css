@@ -9,6 +9,11 @@
     --main-width: 720px;
     --header-height: 60px;
     --footer-height: 60px;
+    --gallery-normal: max(60rem, 50vw);
+    --gallery-vert: max(40rem, 33vw);
+    --gallery-exhibit: max(80rem, 67vw);
+    --gallery-wide: max(90rem, 75vw);
+    --gallery-big: max(110rem, 92vw);
     --radius: 8px;
     --theme: rgb(250,249,246);
     --entry: rgb(255, 255, 255);

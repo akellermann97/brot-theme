@@ -463,7 +463,7 @@ img.in-text {
 .exhibit-two-cl {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-width: 80rem;
+    max-width: var(--gallery-exhibit);
 }
 
 .exhibit-three-cl {
@@ -471,7 +471,7 @@ img.in-text {
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-flow: column, dense;
     grid-auto-columns: 400px;
-    max-width: 80rem;
+    max-width: var(--gallery-exhibit);
 }
 
 .post-content .goat {
@@ -489,7 +489,7 @@ img.in-text {
 }
 
 .mw-80 {
-    max-width: 80rem;
+    max-width: var(--gallery-exhibit);
 }
 
 .exhibit-two-cl ,
@@ -516,12 +516,12 @@ img.in-text {
 
 .wide {
     margin: auto;
-    max-width: 90rem;
+    max-width: var(--gallery-wide);
     margin: 2%;
 }
 
 .big {
-    max-width: 110rem;
+    max-width: var(--gallery-big);
 }
 
 .full-width {
