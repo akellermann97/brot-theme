@@ -132,6 +132,7 @@ figure.vert {
     margin: auto;
 }
 
-figure.wide {
+figure.wide,
+.exhibit-two-cl.wide {
     margin: auto;
 }
