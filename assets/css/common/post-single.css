@@ -78,6 +78,19 @@
     box-shadow: 0 1px 0;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+    transition: box-shadow 0.2s ease-out, color 0.2s ease-out;
+}
+
+.post-content a:hover {
+    box-shadow: 0 2px 0 var(--accent);
+}
+
+.post-content figure a img {
+    transition: transform 0.5s cubic-bezier(.2,.6,.2,1);
+}
+
+.post-content figure a:hover img {
+    transform: scale(1.012);
 }
 
 .post-content a code {
@@ -105,9 +118,19 @@
 .post-content .exhibit-two-cl,
 .post-content .exhibit-three-cl,
 .post-content .exhibit-two-cl-2rw,
-.post-content .exhibit-two-cl-match-height {
+.post-content .exhibit-two-cl-match-height,
+.post-content .exhibit-two-cl-vh {
     margin-bottom: var(--figure-gap);
     margin-top: var(--figure-gap);
+}
+
+/* Museum-style breathing room between back-to-back media; prose-adjacent figures stay tighter.
+   Scoped to direct children so it doesn't push images inside exhibit grids down. */
+.post-content > figure + figure,
+.post-content > figure + [class^="exhibit-"],
+.post-content > [class^="exhibit-"] + figure,
+.post-content > [class^="exhibit-"] + [class^="exhibit-"] {
+    margin-top: var(--figure-gap-wide);
 }
 
 .post-content ol,
@@ -255,7 +278,7 @@
 }
 
 .post-content img {
-    border-radius: 4px;
+    border-radius: 0px;
     margin: 1rem 0;
 }
 
@@ -496,7 +519,8 @@ img.in-text {
 .exhibit-three-cl ,
 .exhibit-two-cl-2rw,
 .exhibit-two-cl-1fr-2fr,
-.exhibit-two-cl-2fr-1fr {
+.exhibit-two-cl-2fr-1fr,
+.exhibit-two-cl-vh {
     margin: auto;
     gap: 1.4rem;
 }
@@ -505,9 +529,55 @@ img.in-text {
 .exhibit-three-cl figure,
 .exhibit-two-cl-2rw figure,
 .exhibit-two-cl-2fr-1fr figure,
-.exhibit-two-cl-1fr-2fr figure {
+.exhibit-two-cl-1fr-2fr figure,
+.exhibit-two-cl-vh figure {
     margin: 0;
     margin-bottom: 0;
+}
+
+/* 2-col exhibit where each image can grow up to the full viewport height.
+   The container sizes to the tallest image (capped at 100vh), so there's
+   no container-level letterboxing — vertical images naturally fill the
+   viewport, horizontal ones make the container shorter. Flex anchoring
+   collapses any horizontal slack to the outer edges. */
+.exhibit-two-cl-vh {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.exhibit-two-cl-vh figure {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+}
+
+.exhibit-two-cl-vh figure:nth-child(odd) {
+    justify-content: flex-end;
+}
+
+.exhibit-two-cl-vh figure:nth-child(even) {
+    justify-content: flex-start;
+}
+
+.exhibit-two-cl-vh figure picture {
+    display: block;
+}
+
+.exhibit-two-cl-vh figure img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+/* On very wide displays (5K+), cap image height at viewport so a single
+   image doesn't scroll past the screen. Below this width, behave like
+   regular two-cl (images render at natural aspect). */
+@media (min-width: 2400px) {
+    .exhibit-two-cl-vh figure picture,
+    .exhibit-two-cl-vh figure img {
+        max-height: 100vh;
+    }
 }
 
 .exhibit-two-cl-2rw picture {
@@ -580,3 +650,4 @@ img.in-text {
     margin-left: var(--gap);
     margin-right: var(--gap);
 }
+

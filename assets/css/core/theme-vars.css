@@ -2,14 +2,16 @@
     --gap: 24px;
     --nav-gap: .75rem;
     --content-gap: 2.9rem;
-    --figure-gap: 6.8rem;
+    --figure-gap: 4.5rem;
+    --figure-gap-wide: 6.8rem;
+    --accent: #FFCD00;
     --max-width: 50rem;
     --reading-width: 40rem;
     --nav-width: 1024px;
     --main-width: 720px;
     --header-height: 60px;
     --footer-height: 60px;
-    --radius: 8px;
+    --radius: 4px;
     --theme: rgb(250,249,246);
     --entry: rgb(255, 255, 255);
     --primary: rgb(30, 30, 30);

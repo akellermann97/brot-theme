@@ -2,7 +2,8 @@
     /* theme-vars */
     :root {
         --gap: 14px;
-        --figure-gap: 2.9rem;
+        --figure-gap: 2rem;
+        --figure-gap-wide: 2.5rem;
     }
 
     /* profile-mode */
@@ -116,7 +117,8 @@
     .exhibit-three-cl,
     .exhibit-two-cl-2rw,
     .exhibit-two-cl-1fr-2fr,
-    .exhibit-two-cl-2fr-1fr{
+    .exhibit-two-cl-2fr-1fr,
+    .exhibit-two-cl-vh {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: unset;
@@ -133,6 +135,14 @@
 
     .wide {
         margin: unset;
+    }
+
+    .exhibit-two-cl-vh figure {
+        display: block;
+    }
+
+    .exhibit-two-cl-vh figure img {
+        width: 100%;
     }
 }
 
