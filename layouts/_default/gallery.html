@@ -61,7 +61,7 @@
 
   <article class="gallery-card{{ if $stackSrc }} has-stack{{ end }}">
     {{- if $stackSrc }}
-    <img class="gallery-card-stack" src="{{ $stackSrc | absURL }}" alt="" loading="lazy" aria-hidden="true">
+    <img class="gallery-card-stack" src="{{ $stackSrc }}" alt="" loading="lazy" aria-hidden="true">
     {{- end }}
     {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
     <div class="gallery-card-cover">
