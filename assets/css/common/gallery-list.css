@@ -35,8 +35,13 @@
     margin: 0;
 }
 
-.gallery-card-cover .entry-cover img,
 .gallery-card-cover .entry-cover picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.gallery-card-cover .entry-cover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
