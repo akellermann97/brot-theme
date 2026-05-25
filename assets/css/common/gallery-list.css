@@ -1,0 +1,99 @@
+.articles-gallery {
+    max-width: 2200px;
+    margin-inline: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.articles-gallery .page-header h1 {
+    max-width: none;
+    margin: 0;
+    font-size: 64px;
+    line-height: 1.1;
+    text-align: left;
+}
+
+.gallery-list {
+    display: grid;
+    /* Single auto-fit rule across all viewports: avoids Safari's
+       cached-track bug when grid-template-columns is overridden
+       by a media query. Card minimum scales with viewport via
+       clamp(240px, 30vw, 600px) so cards grow on larger screens
+       but don't outgrow the 2200px container cap. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(240px, 30vw, 600px)), 1fr));
+    gap: 3rem;
+    padding-block: 2rem;
+}
+
+.gallery-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    isolation: isolate;
+    transition: transform 0.1s;
+}
+
+.gallery-card:active {
+    transform: scale(0.98);
+}
+
+.gallery-card-cover {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--tertiary);
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+    z-index: 2;
+}
+
+.gallery-card-cover .entry-cover {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.gallery-card-cover .entry-cover picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.gallery-card-cover .entry-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--radius);
+}
+
+.gallery-card-stack {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    z-index: 1;
+    opacity: 0;
+    transform: rotate(0deg) translate(0, 0);
+    transition: transform 200ms ease-out, opacity 200ms ease-out, box-shadow 200ms ease-out;
+    pointer-events: none;
+}
+
+.gallery-card-title {
+    font-family: var(--ui-font-family);
+    font-size: 40px;
+    line-height: 1.2;
+    margin: 1.75rem 0 0;
+    max-width: none;
+    color: var(--primary);
+}
+
+.gallery-card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+}

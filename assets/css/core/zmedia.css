@@ -169,4 +169,46 @@
     #searchResults li:active {
         transform: none;
     }
+
+    /* gallery */
+    .gallery-card-cover,
+    .gallery-card-stack {
+        transition: none;
+    }
+    .gallery-card.has-stack:hover .gallery-card-stack {
+        opacity: 0;
+        transform: none;
+    }
+    .gallery-card:hover .gallery-card-cover {
+        transform: none;
+    }
+}
+
+/* gallery */
+@media screen and (max-width: 768px) {
+    .articles-gallery {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .articles-gallery .page-header h1 {
+        font-size: 44px;
+    }
+
+    .gallery-list {
+        gap: 2rem;
+    }
+}
+
+@media (hover: hover) and (min-width: 768px) {
+    .gallery-card.has-stack:hover .gallery-card-stack {
+        opacity: 1;
+        transform: rotate(-4deg) translate(-6px, -6px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    }
+
+    .gallery-card:hover .gallery-card-cover {
+        transform: rotate(1deg);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    }
 }
