@@ -200,18 +200,6 @@
     }
 }
 
-@media (min-width: 600px) {
-    .gallery-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1900px) {
-    .gallery-list {
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
-    }
-}
-
 @media (hover: hover) and (min-width: 768px) {
     .gallery-card.has-stack:hover .gallery-card-stack {
         opacity: 1;

@@ -15,7 +15,12 @@
 
 .gallery-list {
     display: grid;
-    grid-template-columns: 1fr;
+    /* Single auto-fit rule across all viewports: avoids Safari's
+       cached-track bug when grid-template-columns is overridden
+       by a media query. Card minimum scales with viewport via
+       clamp(240px, 30vw, 600px) so cards grow on larger screens
+       but don't outgrow the 2200px container cap. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(240px, 30vw, 600px)), 1fr));
     gap: 3rem;
     padding-block: 2rem;
 }
