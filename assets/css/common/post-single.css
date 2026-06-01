@@ -119,6 +119,7 @@
 .post-content .exhibit-three-cl,
 .post-content .exhibit-two-cl-2rw,
 .post-content .exhibit-two-cl-match-height,
+.post-content .exhibit-crop-compare,
 .post-content .exhibit-two-cl-vh {
     margin-bottom: var(--figure-gap);
     margin-top: var(--figure-gap);
@@ -649,5 +650,50 @@ img.in-text {
     align-items: center;
     margin-left: var(--gap);
     margin-right: var(--gap);
+}
+
+/* Crop comparison: a dominant main image beside a narrower column holding
+   1–2 detail crops. The first inner figure is the main; every figure after it
+   is a crop. Crops stack vertically in the right column, top-aligned.
+
+   Layout mechanics: the two crop rows are fixed at `min-content` so they can't
+   stretch, and a trailing `auto` spacer row absorbs whatever extra height the
+   spanning main image needs. This keeps the crops tightly stacked at the top
+   whether the main is taller (whitespace falls below the crops) or shorter
+   (whitespace falls below the main) than the crop stack.
+
+   Same horizontal footprint as `.wide`. Collapses to a single column at the
+   small breakpoint — see core/zmedia.css. */
+.exhibit-crop-compare {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    grid-template-rows: min-content min-content auto;
+    gap: 1.4rem;
+    max-width: 90rem;
+    margin: auto;
+}
+
+.exhibit-crop-compare figure {
+    margin: 0;
+    min-width: 0;
+}
+
+.exhibit-crop-compare figure img {
+    margin: 0;
+    display: block;
+}
+
+/* Main image spans all three rows (two crop rows + spacer) and pins to the
+   top of column 1. */
+.exhibit-crop-compare > figure:first-child {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    align-self: start;
+}
+
+/* Crops flow one-per-row into the right column. */
+.exhibit-crop-compare > figure:not(:first-child) {
+    grid-column: 2;
+    align-self: start;
 }
 

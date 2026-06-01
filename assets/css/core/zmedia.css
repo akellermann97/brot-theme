@@ -144,6 +144,25 @@
     .exhibit-two-cl-vh figure img {
         width: 100%;
     }
+
+    /* crop-compare: collapse to a single column with the crops stacked above
+       the main image. The main is source-ordered first, so `order` lifts the
+       crops on top of it. */
+    .exhibit-crop-compare {
+        grid-template-columns: 1fr;
+        grid-template-rows: unset;
+    }
+
+    .exhibit-crop-compare > figure:first-child {
+        grid-column: 1;
+        grid-row: auto;
+        order: 2;
+    }
+
+    .exhibit-crop-compare > figure:not(:first-child) {
+        grid-column: 1;
+        order: 1;
+    }
 }
 
 /* footer */
