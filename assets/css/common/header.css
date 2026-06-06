@@ -29,12 +29,12 @@
 #menu {
     display: flex;
     margin: auto var(--gap);
-    font-family: din2014regular;
+    font-family: "BrotSans";
 }
 
 .logo {
     flex-wrap: inherit;
-    font-family: din2014bold;
+    font-family: "BrotSans";
 }
 
 .logo a {

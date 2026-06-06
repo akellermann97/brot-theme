@@ -23,11 +23,7 @@
 {{- end }}
 
 {{- if (not site.Params.disableScrollToTop) }}
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+<a href="#top" class="back-to-top" accesskey="g">Back to top</a>
 {{- end }}
 
 {{- partial "extend_footer.html" . }}
@@ -61,22 +57,6 @@
     });
 
 </script>
-
-{{- if (not site.Params.disableScrollToTop) }}
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-{{- end }}
 
 {{- if (not site.Params.disableThemeToggle) }}
 <script>
