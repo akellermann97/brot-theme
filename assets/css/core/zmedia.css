@@ -31,6 +31,20 @@
     }
 }
 @media screen and (max-width: 768px) {
+    /* post-footer (tags + post nav links) — sibling of .post-content, so it
+       misses the body gutter below; match it so tags don't hug the edge */
+    .post-footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* pagination (list prev/next) — lives outside .articles, so it misses the
+       1em list gutter; inset the prev/next buttons to match the cards */
+    .pagination {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
     .post-content p,
     .post-content figure:not(.full-width):not(.no-pad),
     .post-content h1,
