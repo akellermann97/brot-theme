@@ -1,7 +1,7 @@
 {{- define "main" }}
 
 <article class="post-single">
-  <header class="post-header-TEST">
+  <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title entry-hint-parent">
       {{ .Title }}
@@ -14,11 +14,8 @@
       </span>
       {{- end }}
     </h1>
-    {{- if .Description }}
-    <div class="post-description">
-      {{ .Description }}
-    </div>
-    {{- end }}
+    {{- /* No visible dek on the about page: its `description` front matter is
+           intentionally meta/SEO-only (feeds <meta> + ProfilePage schema). */ -}}
     {{- if not (.Param "hideMeta") }}
     <div class="post-meta">
       {{- partial "post_meta.html" . -}}
