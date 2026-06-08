@@ -1,0 +1,53 @@
+{{- /*
+  Returns a schema.org Person (or Organization) dict for the site's publisher.
+
+  Single source of truth for the site's identity entity — embedded wherever a
+  person is referenced (WebSite.publisher, ProfilePage.mainEntity, BlogPosting
+  author/publisher, Blog author/publisher). Driven entirely by [params.schema]
+  in the site config so renaming a section or expanding the site never requires
+  editing a template.
+
+  Config (all optional except author, which falls back to site.Params.author):
+    [params.schema]
+      publisherType = "Person"        # entity @type (Person | Organization)
+      personSection = "about"         # section whose page represents this entity
+      jobTitle      = "…"
+      knowsAbout    = ["…", "…"]
+      sameAs        = ["…", "…"]       # identity links; falls back to SocialIcons
+
+  The stable @id ("<home>#person") lets every page point at the same entity.
+*/ -}}
+{{- $type := site.Params.schema.publisherType | default "Person" -}}
+{{- $personSection := site.Params.schema.personSection | default "about" -}}
+{{- $personPage := site.GetPage $personSection -}}
+{{- $person := dict
+      "@type" $type
+      "@id" (printf "%s#person" site.Home.Permalink)
+      "name" site.Params.author
+-}}
+{{- with $personPage -}}
+  {{- $person = merge $person (dict "url" .Permalink) -}}
+{{- end -}}
+{{- with site.Params.schema.jobTitle -}}
+  {{- $person = merge $person (dict "jobTitle" .) -}}
+{{- end -}}
+{{- with site.Params.schema.knowsAbout -}}
+  {{- $person = merge $person (dict "knowsAbout" .) -}}
+{{- end -}}
+{{- $sameAs := site.Params.schema.sameAs -}}
+{{- if not $sameAs -}}
+  {{- $sameAs = slice -}}
+  {{- range site.Params.SocialIcons -}}
+    {{- $sameAs = $sameAs | append (trim .url " ") -}}
+  {{- end -}}
+{{- end -}}
+{{- with $sameAs -}}
+  {{- $person = merge $person (dict "sameAs" .) -}}
+{{- end -}}
+{{- with $personPage -}}
+  {{- with .Params.cover.image -}}
+    {{- $img := cond (eq $personPage.Params.cover.relative true) (path.Join $personPage.RelPermalink .) . -}}
+    {{- $person = merge $person (dict "image" ($img | absURL)) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $person -}}

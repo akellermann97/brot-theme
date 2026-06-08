@@ -1,21 +1,28 @@
+{{- /* Section → schema-type routing is config-driven (see [params.schema]). */ -}}
+{{- $personSection := site.Params.schema.personSection | default "about" -}}
+{{- $blogSections := site.Params.schema.blogSections | default (slice "posts") -}}
+{{- $websiteID := printf "%s#website" site.Home.Permalink -}}
+{{- /* Resolve the person section's page once; matched by identity below so a
+       root-level leaf bundle (empty .Section) still routes correctly. */ -}}
+{{- $personPage := site.GetPage $personSection -}}
+
 {{ if .IsHome }}
+{{- $person := partial "templates/_funcs/schema-person.html" . -}}
+{{- $website := dict
+      "@context" "https://schema.org"
+      "@type" "WebSite"
+      "@id" $websiteID
+      "url" site.Home.Permalink
+      "name" site.Title
+      "description" (site.Params.description | plainify)
+      "inLanguage" (site.Language.Lang | default "en-us")
+      "publisher" $person
+      "author" $person
+-}}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "{{- ( site.Params.schema.publisherType | default "Organization") | title -}}",
-  "name": {{ site.Title }},
-  "url": {{ site.Home.Permalink }},
-  "description": {{ site.Params.description | plainify | truncate 180 | safeHTML }},
-  "thumbnailUrl": {{ site.Params.assets.favicon | default "favicon.ico" | absURL }},
-  "sameAs": [
-    {{- if site.Params.schema.sameAs }}
-      {{ range $i, $e := site.Params.schema.sameAs }}{{ if $i }}, {{ end }}{{ trim $e " " }}{{ end }}
-    {{- else}}
-      {{ range $i, $e := site.Params.SocialIcons }}{{ if $i }}, {{ end }}{{ trim $e.url " " | safeURL }}{{ end }}
-    {{- end}}
-  ]
-}
+{{ $website | jsonify (dict "indent" "  ") | safeJS }}
 </script>
+
 {{- else if (or .IsPage .IsSection) }}
 {{/* BreadcrumbList */}}
 {{- $url := replace .Parent.Permalink ( printf "%s" site.Home.Permalink) "" }}
@@ -55,70 +62,95 @@
   ]
 }
 </script>
-{{- if .IsPage }}
+
+{{- /* Entity node, routed by section:
+       person section → ProfilePage + Person
+       blog section page → BlogPosting
+       blog section list → Blog */ -}}
+{{- if (and $personPage (eq .RelPermalink $personPage.RelPermalink)) }}
+{{- $person := partial "templates/_funcs/schema-person.html" . -}}
+{{- $profile := dict
+      "@context" "https://schema.org"
+      "@type" "ProfilePage"
+      "@id" (printf "%s#profilepage" .Permalink)
+      "url" .Permalink
+      "name" (.Title | plainify)
+      "isPartOf" (dict "@id" $websiteID)
+      "mainEntity" $person
+-}}
+{{- with (.Description | default site.Params.description | plainify) -}}
+  {{- $profile = merge $profile (dict "description" .) -}}
+{{- end -}}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ .Title | plainify}},
-  "name": "{{ .Title | plainify }}",
-  "description": {{ with .Description | plainify }}{{ . }}{{ else }}{{ .Summary | plainify  }}{{ end -}},
-  "keywords": [
-    {{- if .Params.keywords }}
-    {{ range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}
-    {{- else }}
-    {{ range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}
-    {{- end }}
-  ],
-  "articleBody": {{ .Content | safeJS | htmlUnescape | plainify }},
-  "wordCount" : "{{ .WordCount }}",
-  "inLanguage": {{ .Language.Lang | default "en-us" }},
-  {{ if .Params.cover.image -}}
-  "image":
-    {{- if (ne .Params.cover.relative true) -}}
-    {{ .Params.cover.image | absURL }},
-    {{- else -}}
-    {{ (path.Join .RelPermalink .Params.cover.image ) | absURL }},
-    {{- end}}
-  {{- else }}
-    {{- $images := partial "partials/templates/_funcs/get-page-images" . -}}
-    {{- with index $images 0 -}}
-  "image": {{ .Permalink }},
-    {{- end }}
-  {{- end -}}
-  "datePublished": {{ .PublishDate }},
-  "dateModified": {{ .Lastmod }},
-  {{- with (.Params.author | default site.Params.author) }}
-  "author":
-    {{- if (or (eq (printf "%T" .) "[]string") (eq (printf "%T" .) "[]interface {}")) -}}
-  [{{- range $i, $v := . -}}
-  {{- if $i }}, {{end -}}
-  {
-    "@type": "Person",
-    "name": {{ $v }}
-  }
-  {{- end }}],
-    {{- else -}}
-  {
-    "@type": "Person",
-    "name": {{ . }}
-  },
-    {{- end -}}
-  {{- end }}
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": {{ .Permalink | safeHTML }}
-  },
-  "publisher": {
-    "@type": "{{- ( site.Params.schema.publisherType | default "Organization") | title -}}",
-    "name": {{ site.Title }},
-    "logo": {
-      "@type": "ImageObject",
-      "url": {{ site.Params.assets.favicon | default "favicon.ico" | absURL }}
-    }
-  }
-}
+{{ $profile | jsonify (dict "indent" "  ") | safeJS }}
 </script>
-{{- end }}{{/* .IsPage end */}}
+
+{{- else if (and .IsPage (in $blogSections .Section)) }}
+{{- $person := partial "templates/_funcs/schema-person.html" . -}}
+{{- $post := dict
+      "@context" "https://schema.org"
+      "@type" "BlogPosting"
+      "@id" (printf "%s#article" .Permalink)
+      "url" .Permalink
+      "headline" (.Title | plainify)
+      "name" (.Title | plainify)
+      "inLanguage" (.Language.Lang | default "en-us")
+      "wordCount" .WordCount
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+      "isPartOf" (dict "@id" $websiteID)
+      "author" $person
+      "publisher" $person
+-}}
+{{- with (.Description | default .Summary | plainify) -}}
+  {{- $post = merge $post (dict "description" .) -}}
+{{- end -}}
+{{- with (.Params.keywords | default .Params.tags) -}}
+  {{- $post = merge $post (dict "keywords" .) -}}
+{{- end -}}
+{{- if not .PublishDate.IsZero -}}
+  {{- $post = merge $post (dict "datePublished" (.PublishDate.Format "2006-01-02T15:04:05Z07:00")) -}}
+{{- end -}}
+{{- if not .Lastmod.IsZero -}}
+  {{- $post = merge $post (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) -}}
+{{- end -}}
+{{- with .Content -}}
+  {{- $post = merge $post (dict "articleBody" (. | plainify | htmlUnescape)) -}}
+{{- end -}}
+{{- $img := "" -}}
+{{- with .Params.cover.image -}}
+  {{- $img = cond (eq $.Params.cover.relative true) (path.Join $.RelPermalink .) . -}}
+  {{- $img = $img | absURL -}}
+{{- else -}}
+  {{- with partial "partials/templates/_funcs/get-page-images" . -}}
+    {{- with index . 0 -}}{{- $img = .Permalink -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $img -}}
+  {{- $post = merge $post (dict "image" .) -}}
+{{- end -}}
+<script type="application/ld+json">
+{{ $post | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+
+{{- else if (and .IsSection (in $blogSections .Section)) }}
+{{- $person := partial "templates/_funcs/schema-person.html" . -}}
+{{- $blog := dict
+      "@context" "https://schema.org"
+      "@type" "Blog"
+      "@id" (printf "%s#blog" .Permalink)
+      "url" .Permalink
+      "name" (.Title | plainify)
+      "inLanguage" (.Language.Lang | default "en-us")
+      "isPartOf" (dict "@id" $websiteID)
+      "author" $person
+      "publisher" $person
+-}}
+{{- with (.Description | default site.Params.description | plainify) -}}
+  {{- $blog = merge $blog (dict "description" .) -}}
+{{- end -}}
+<script type="application/ld+json">
+{{ $blog | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{- end }}
 
 {{- end -}}
