@@ -101,7 +101,7 @@
       "author" $person
       "publisher" $person
 -}}
-{{- with (.Description | default .Summary | plainify) -}}
+{{- with (.Description | default .Summary | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace) -}}
   {{- $post = merge $post (dict "description" .) -}}
 {{- end -}}
 {{- with (.Params.keywords | default .Params.tags) -}}
@@ -121,7 +121,7 @@
   {{- $img = cond (eq $.Params.cover.relative true) (path.Join $.RelPermalink .) . -}}
   {{- $img = $img | absURL -}}
 {{- else -}}
-  {{- with partial "partials/templates/_funcs/get-page-images" . -}}
+  {{- with partial "templates/_funcs/get-page-images" . -}}
     {{- with index . 0 -}}{{- $img = .Permalink -}}{{- end -}}
   {{- end -}}
 {{- end -}}
