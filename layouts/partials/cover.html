@@ -2,9 +2,15 @@
 {{- if (and .Params.cover.image (not $.isHidden)) }}
 {{- $alt := (.Params.cover.alt | default .Params.cover.caption | plainify) }}
 {{- $loading := cond $.IsSingle "eager" "lazy" }}
+{{- $responsiveImages := (.Params.cover.responsiveImages | default site.Params.cover.responsiveImages) | default true }}
+{{- if (and (not $.IsSingle) $responsiveImages) }}
+{{/* List/preview context: serve downscaled thumbnails instead of the original */}}
+<figure class="entry-cover">
+    {{- partial "preview_image.html" (dict "src" .Params.cover.image "alt" $alt "page" . "sizes" $.sizes) }}
+</figure>
+{{- else }}
 {{ $imageResource := resources.Get .Params.cover.image }}
 <figure class="entry-cover">
-    {{- $responsiveImages := (.Params.cover.responsiveImages | default site.Params.cover.responsiveImages) | default true }}
     {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}
     {{- $pageBundleCover     := (.Resources.ByType "image").GetMatch (printf "*%s*" (.Params.cover.image)) }}
     {{- $globalResourcesCover := (resources.ByType "image").GetMatch (printf "*%s*" (.Params.cover.image)) }}
@@ -51,5 +57,6 @@
         {{ with .Params.cover.caption }}<p>{{ . | markdownify }}</p>{{- end }}
     {{- end }}
 </figure>
+{{- end }}{{/* End single/list branch */}}
 {{- end }}{{/* End image */}}
 {{- end -}}{{/* End context */ -}}

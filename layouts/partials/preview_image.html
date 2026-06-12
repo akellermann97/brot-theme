@@ -1,0 +1,61 @@
+{{- /*
+  Renders a downscaled, responsive thumbnail for list/preview contexts.
+
+  Expects a dict:
+    src         image path as referenced in content (e.g. "/img/gallery/x.jpg")
+    alt         alt text (default "")
+    class       optional class for the <img>
+    sizes       optional sizes attribute (default "(min-width: 768px) 720px, 100vw")
+    page        optional Page, for resolving page-bundle resources
+    decorative  when true, hides the image from assistive tech
+
+  Falls back to the raw src untouched when the image can't be resolved or
+  isn't a processable raster format (external URLs, SVG, ...).
+*/ -}}
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $sizes := .sizes | default "(min-width: 768px) 720px, 100vw" -}}
+{{- $res := "" -}}
+{{- with .page -}}
+{{- $res = (.Resources.ByType "image").GetMatch (printf "*%s*" $.src) -}}
+{{- end -}}
+{{- if not $res -}}
+{{- $res = resources.Get $src -}}
+{{- end -}}
+{{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
+{{- if hugo.IsExtended -}}
+{{- $processableFormats = $processableFormats | append "webp" -}}
+{{- end -}}
+{{- if (and $res (in $processableFormats $res.MediaType.SubType)) -}}
+{{- $widths := slice 360 600 900 1200 -}}
+{{- $candidates := slice -}}
+{{- range $w := $widths -}}
+{{- if ge $res.Width $w -}}{{- $candidates = $candidates | append $w -}}{{- end -}}
+{{- end -}}
+{{- if not $candidates -}}{{- $candidates = slice $res.Width -}}{{- end -}}
+{{- $fallbackWidth := math.Min 720 $res.Width -}}
+{{- $fallback := $res.Resize (printf "%.0fx" $fallbackWidth) -}}
+{{- $srcset := slice -}}
+{{- range $w := $candidates -}}
+{{- $srcset = $srcset | append (printf "%s %dw" (($res.Resize (printf "%dx" $w)).RelPermalink) $w) -}}
+{{- end -}}
+<picture>
+{{- if hugo.IsExtended -}}
+{{- $webpSet := slice -}}
+{{- range $w := $candidates -}}
+{{- $webpSet = $webpSet | append (printf "%s %dw" (($res.Resize (printf "%dx webp" $w)).RelPermalink) $w) -}}
+{{- end }}
+<source type="image/webp" srcset="{{ delimit $webpSet ", " }}" sizes="{{ $sizes }}"/>
+{{- end }}
+<img loading="lazy" decoding="async"
+    {{- with .class }} class="{{ . }}"{{ end }}
+    src="{{ $fallback.RelPermalink }}"
+    srcset="{{ delimit $srcset ", " }}" sizes="{{ $sizes }}"
+    width="{{ $fallback.Width }}" height="{{ $fallback.Height }}"
+    alt="{{ $alt }}"{{ if .decorative }} aria-hidden="true"{{ end }}/>
+</picture>
+{{- else -}}
+<img loading="lazy"
+    {{- with .class }} class="{{ . }}"{{ end }} src="{{ $src }}"
+    alt="{{ $alt }}"{{ if .decorative }} aria-hidden="true"{{ end }}/>
+{{- end -}}

@@ -61,11 +61,11 @@
 
   <article class="gallery-card{{ if $stackSrc }} has-stack{{ end }}">
     {{- if $stackSrc }}
-    <img class="gallery-card-stack" src="{{ $stackSrc }}" alt="" loading="lazy" aria-hidden="true">
+    {{- partial "preview_image.html" (dict "src" $stackSrc "class" "gallery-card-stack" "decorative" true "page" . "sizes" "(min-width: 768px) 30vw, 100vw") }}
     {{- end }}
     {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
     <div class="gallery-card-cover">
-      {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+      {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden "sizes" "(min-width: 768px) 30vw, 100vw") }}
     </div>
     <h2 class="gallery-card-title">
       {{- .Title -}}
