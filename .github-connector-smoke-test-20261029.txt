@@ -1,0 +1,2 @@
+Temporary GitHub connector write-access test.
+This branch and pull request are intended to be closed without merging.
